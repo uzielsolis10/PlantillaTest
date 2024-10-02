@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    //
+
     internal virtual void CheckLimits()
     {
         if (this.transform.position.x > xLimit)
@@ -40,5 +40,6 @@ public class Projectile : MonoBehaviour
         }
 
     }
+
 
 }
