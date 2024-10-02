@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
 
     internal virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall") )
+        if (collision.gameObject.CompareTag("Enemi") )
         {
             Destroy(this.gameObject);
         }
