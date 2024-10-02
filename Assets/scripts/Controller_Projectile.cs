@@ -1,17 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Controller_Projectile : Projectile
 {
     public float projectileSpeed;
-    public int danio = 20; // Daño que inflige la bala
 
     public Rigidbody rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb=GetComponent<Rigidbody>();
     }
 
+    
     public override void Update()
     {
         ProjectileDirection();
@@ -22,23 +25,11 @@ public class Controller_Projectile : Projectile
     {
         rb.velocity = new Vector3(1 * projectileSpeed, rb.velocity.y, 0);
     }
-
-    // Método para manejar la colisión
-    internal override void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Verifica si colisiona con el enemigo
-        EnemigoSeguir enemigo = collision.gameObject.GetComponent<EnemigoSeguir>();
-        if (enemigo != null)
+        if (collision.gameObject.CompareTag("Enemi"))
         {
-            enemigo.RecibirDanio(danio); // Inflige daño al enemigo
+            Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Wall"))
-        {
-            Destroy(this.gameObject);
-        }
-
-        // Destruye la bala después de colisionar
-        Destroy(gameObject);
     }
 }
-

@@ -42,7 +42,7 @@ public class Controller_Player : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Power"))
+        if (collision.gameObject.CompareTag("PowerUp"))
         {
             speed = 20f;
             Destroy(collision.gameObject);  // Destruye el objeto de boost
