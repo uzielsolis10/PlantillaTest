@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 9292022}
   - component: {fileID: 9292029}
   - component: {fileID: 9292030}
+  - component: {fileID: 9292031}
   m_Layer: 0
   m_Name: PLAYER
   m_TagString: Player
@@ -320,6 +321,18 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2759410206484423927, guid: 54580bd98728c294ba9391db6c321250,
     type: 3}
   spawnPoint: {fileID: 1246824129}
+--- !u!114 &9292031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9292021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc233460c9162024da052edc4a813e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &228143837
 GameObject:
   m_ObjectHideFlags: 0
