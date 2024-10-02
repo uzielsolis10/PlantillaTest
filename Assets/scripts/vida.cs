@@ -1,33 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro; // Necesario para trabajar con TextMeshPro
 
-public class vida : MonoBehaviour
-
-
+public class PlayerHealthTMP : MonoBehaviour
 {
-    public float vidaMaxima = 100f;
-    public float vidaActual;
+    public int playerHealth = 100;
+    public TextMeshProUGUI healthText; // Referencia al texto de TextMeshPro UI
+    private Vector3 initialPosition;
 
     void Start()
     {
-        vidaActual = vidaMaxima;
+        UpdateHealthText();
+        initialPosition = transform.position;
     }
-
-    public void RecibirDanio(float cantidad)
+    public virtual void FixedUpdate()
     {
-        vidaActual -= cantidad;
-
-        if (vidaActual <= 0)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Muerte();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    private void Muerte()
+    void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("El jugador ha muerto");
+        if (collision.gameObject.CompareTag("Enemi"))
+        {
+            playerHealth -= 20;
+            UpdateHealthText();
+            transform.position = initialPosition;
+            if (playerHealth <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Debug.Log("Game Over");
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+    void UpdateHealthText()
+    {
+        healthText.text = "Vida del Jugador: " + playerHealth.ToString();
     }
 }
-
 

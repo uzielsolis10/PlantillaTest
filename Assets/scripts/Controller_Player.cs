@@ -16,6 +16,21 @@ public class Controller_Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+    public int vida = 100;
+
+    public void RecibirDanio(int danio)
+    {
+        vida -= danio;
+        Debug.Log("Vida del jugador: " + vida);
+
+        if (vida <= 0)
+        {
+            // Aquí puedes manejar lo que pasa cuando el jugador muere
+            Destroy(gameObject);
+            // También puedes reiniciar la escena si lo prefieres
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     public virtual void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.R))

@@ -141,7 +141,8 @@ GameObject:
   - component: {fileID: 9292029}
   - component: {fileID: 9292030}
   - component: {fileID: 9292031}
-  m_Layer: 0
+  - component: {fileID: 9292032}
+  m_Layer: 6
   m_Name: PLAYER
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -163,8 +164,8 @@ MonoBehaviour:
   xLimit: 30
   yLimit: 20
   projectileSpeed: 0
-  danio: 20
   rb: {fileID: 0}
+  vida: 100
 --- !u!114 &9292023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  vida: 100
 --- !u!135 &9292025
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -333,6 +335,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc233460c9162024da052edc4a813e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9292032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9292021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e802332cf9832a84da6847a2dfc5abea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  healthText: {fileID: 0}
 --- !u!1 &228143837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1077,7 @@ GameObject:
   - component: {fileID: 1198705771}
   m_Layer: 0
   m_Name: enemi
-  m_TagString: Untagged
+  m_TagString: Enemi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1208,7 +1224,7 @@ GameObject:
   - component: {fileID: 1246824132}
   - component: {fileID: 1246824131}
   - component: {fileID: 1246824130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

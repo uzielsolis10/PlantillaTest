@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI; // Para mostrar la vida en pantalla
 
 public class EnemigoSeguir : MonoBehaviour
-
 {
     public Transform objetivo; // El jugador u objeto que el enemigo seguirá
     public float velocidad = 5f;
@@ -15,7 +14,11 @@ public class EnemigoSeguir : MonoBehaviour
 
     void Update()
     {
-     
+        // Actualizar la barra de vida
+        if (barraDeVida != null)
+        {
+            barraDeVida.value = vida; // Asegúrate de que la barra de vida se actualice
+        }
 
         // Verifica si el objetivo es nulo antes de calcular la distancia
         if (objetivo != null)
@@ -34,32 +37,20 @@ public class EnemigoSeguir : MonoBehaviour
                 transform.LookAt(objetivo);
             }
         }
-        else
-        {
-            // Opcional: Puedes manejar el caso cuando el objetivo es nulo (ej. detener al enemigo)
-            // Puedes destruir el enemigo o detener su movimiento
-            // Destroy(gameObject); // Si decides destruirlo
-        }
     }
 
-
-
-// Método para recibir daño
-public void RecibirDanio(int danio)
+    public void RecibirDanio(int danio)
     {
         vida -= danio;
 
-        // Si la vida llega a 0, el enemigo muere
         if (vida <= 0)
         {
             Morir();
         }
     }
 
-    // Método para "morir"
     void Morir()
     {
-        // Aquí podrías agregar animaciones o efectos de destrucción
         Destroy(gameObject); // Destruir el enemigo cuando su vida sea 0
     }
 
@@ -68,29 +59,24 @@ public void RecibirDanio(int danio)
         // Verifica si colisiona con el jugador
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Destruir el jugador
-            Destroy(collision.gameObject);
-            // Reiniciar la escena
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
-
-    // Clase interna para la bala
-    public class Bala : MonoBehaviour
-    {
-        public int danio = 20;
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            EnemigoSeguir enemigo = collision.gameObject.GetComponent<EnemigoSeguir>();
-
-            if (enemigo != null)
+            // Suponiendo que el jugador tiene un método para recibir daño
+            Controller_Player playerController = collision.gameObject.GetComponent<Controller_Player>();
+            if (playerController != null)
             {
-                enemigo.RecibirDanio(danio);
+                playerController.RecibirDanio(20); // Ajusta el daño según sea necesario
             }
 
-            // Destruir la bala después de colisionar
-            Destroy(gameObject);
+            // Reiniciar la posición del jugador
+            collision.gameObject.transform.position = Vector3.zero; // Cambia esto a la posición deseada
+        }
+
+        // Verifica si colisiona con un proyectil
+        if (collision.gameObject.CompareTag("Proyectil"))
+        {
+            RecibirDanio(20); // Asumiendo que el proyectil hace 20 de daño
+            Destroy(collision.gameObject); // Destruir el proyectil después de colisionar
         }
     }
 }
+
+
